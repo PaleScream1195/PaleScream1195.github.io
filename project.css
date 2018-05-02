@@ -1,0 +1,53 @@
+body{
+	background-image:url(https://pre00.deviantart.net/d2b9/th/pre/i/2013/321/5/b/the_gallows_by_aniqeanuk-d6ukirn.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	color: A60EC8 ;
+	font-weight: bold;
+	background-color: black;
+}
+
+
+.text{
+	background-color: rgba(30, 201, 232, 0.4);
+	width: 250px;
+	text-align: center;
+	margin-left: 40%;
+	font-size: 100%;
+	margin-bottom: 25px;
+}
+
+.array{
+	background-color: rgba(44, 217, 145, 0.4);
+	width: 250px;
+	text-align: center;
+	margin-left: 40%;
+	margin-bottom: 25px;
+	font-size: 150%;
+}
+
+.title{
+	font-size: 300%;
+	width: 250px;
+	text-align: center;
+	margin-left: 40%;
+	margin-bottom: 25px;
+	background-color: rgba(30, 201, 232, 0.4);}
+
+p{
+	border: 3px solid black;
+}
+
+#userGuess{
+	margin-left: 40%;
+	margin-bottom: 25px;
+}
+#userGuessButton{
+	margin-left: 48%;
+	margin-bottom: 25px;
+}
+
+#Reset{
+	margin-left: 48%;
+	margin-bottom: 25px;
+}

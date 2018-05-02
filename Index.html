@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<!--  ********************************************************************
+      Index.html        by Ethan Owens       Date 19 April 2018
+      The JavaScript script contained in this file
+      will interact with the user to play a word guessing game.
+      ********************************************************************  -->
+
+<html>
+
+  <head> 
+    <meta charset = 'utf-8'>
+    <title>WordGuess</title>
+	<link rel="stylesheet" href="project.css">
+  </head>
+
+  <body>
+  
+  <p class="title"> JavaScript HangMan </p>
+  <p class="text"> The Word You're Trying To Guess:  </p>
+  <p id="answerArrayDisplay" class="array">  </p>
+  
+  <input id="userGuess" type="text" maxlength='1'>
+  <button id="UserGuessButton" type="button"> Guess! </button>
+  <p class="text"> Letters You Have Guessed: </p>
+  <p id="guessedLetters" class="array"> </p>
+  <p class="text"> Letters That Were Wrong: </p>
+  <p id="wrongGuess" class="array"> </p>
+  
+  <button id="Reset" type="button"> RESET! </button>
+  
+	<script language ="JavaScript">//can change the language if need be.	
+	
+	window.addEventListener("load", AnswerArrayListener);
+    
+	//the array of words that will be used by the game
+	var words = [
+	"clean", "wounds", "grave",
+	"exiled", "flash", "slaughter",
+	"red", "gold", "laughter", "dead",
+	"blue", "dog", "cat", "garnish",
+	"orange", "woman", "man", "fish",
+	"cow", "steak", "cake", "mango", "salty"
+	];
+	
+	
+	/*
+	Check List
+		Do the CSS
+		
+		pages.github.com 
+			This will be where the project is hosted. 
+			I have an account to GitHub
+	*/
+	
+	
+	
+	
+	
+	
+	//picking the random word for the round
+	var word = words[Math.floor(Math.random()*words.length)];
+	console.log("Word Is: "+word);
+	
+	//some global variables
+	var remainingLetters = word.length;
+	var lives = 0;
+	var guesses = [];
+	var wrongGuess = [];
+
+	
+	//Set up the answer array
+	var answerArray = [];
+	for (var i = 0; i<word.length; i++){
+	answerArray[i]="_";
+	}
+	
+	document.getElementById("userGuess").focus();
+	
+	document.getElementById("UserGuessButton").addEventListener ( "click", Main) ;
+	
+	function AnswerArrayListener (){
+	document.getElementById("answerArrayDisplay").innerText= answerArray ;
+	} //end of Load Listener
+	
+	function Main (){
+	
+	//the game loop
+	while (remainingLetters > 0 && lives < 10 ){
+	
+	//make a new name; this is the "lightswitch"
+	var abc = 0;
+	//needs a new name; another "lightswitch"
+	var xyz = 0;
+	var guess = document.getElementById("userGuess").value;
+	document.getElementById("userGuess").value="";
+	document.getElementById("userGuess").focus();
+	
+	if ( guess != ''){
+	guess.toLowerCase();
+	console.log("guess: "+guess);
+	
+	
+	//checks to see if the letter has been used beforehand.
+	for (var x = 0; x < guesses.length; x++)
+		{
+		if ( guesses[x] === guess){
+			console.log("The Value of X: "+x);
+			abc=1;
+			console.log("abc = "+abc);
+			alert("You have already used this letter, please guess again.")
+			}
+		}
+	//breaks the loop if abc is tripped in the above for loop.
+	if(abc === 1){break;}	
+	guesses.push(guess);
+	document.getElementById("guessedLetters").innerText= guesses;
+	console.log("guesses: "+ guesses);
+	
+	//update the game state with the guess
+	for (var j=0; j<word.length; j++){
+	  if (word[j] === guess){
+	  answerArray[j] = guess;
+	  remainingLetters --;
+	  xyz = 1;
+	  console.log("remaing letters: "+remainingLetters);
+	  document.getElementById("answerArrayDisplay").innerText= answerArray ;
+	  break;
+	   }
+	   }
+	   if(xyz != 1)
+		{
+		wrongGuess.push(guess)
+		document.getElementById("wrongGuess").innerText= wrongGuess;
+		lives ++;
+		console.log("wrongGuess: "+wrongGuess);
+		break;
+		}
+	  
+	 } else { 
+			alert("Please enter a letter.");
+			}
+	 break;
+	}//end of while loop
+	
+	//lossing statement
+	if (lives === 9){
+	alert("You Dead "
+		+"The Word was: "+word)}
+	
+	//winning statement
+	if (remainingLetters === 0){
+	alert("You Live Another Day ")}
+	}//end of Main function
+	
+	document.getElementById("Reset").addEventListener("click",function(){
+	console.clear();
+	console.log("reset function");
+	word = words[Math.floor(Math.random()*words.length)];
+	console.log("word Is: "+word);
+	answerArray = [];
+		for (var i = 0; i<word.length; i++){
+		answerArray[i]="_";
+		}
+	remainingLetters = word.length;
+	lives = 0;
+	guesses = [];
+	wrongGuess = [];
+	document.getElementById("userGuess").value="";
+	document.getElementById("answerArrayDisplay").innerText= answerArray ;
+	document.getElementById("guessedLetters").innerText= guesses;
+	document.getElementById("wrongGuess").innerText= wrongGuess;
+	document.getElementById("userGuess").focus();
+	});
+	
+	
+	
+	</script>
+  </body>
+</html>
